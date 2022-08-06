@@ -32,7 +32,22 @@ jobs:
           publish_dir: docs/.vitepress/dist
 
   deployVercel:
-    name: 'Deploy Vercel And Netlify'
+    name: 'Deploy Vercel'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # https://github.com/marketplace/actions/deploy-to-vercel-action
+      - name: deploy to vercel
+        uses: BetaHuhn/deploy-to-vercel-action@v1.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+  deployNetlify:
+    name: 'Deploy Netlify'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -47,12 +62,3 @@ jobs:
           use_nvm: false
           build_command: 'npm run build'
           build_directory: 'docs/.vitepress/dist'
-
-      # https://github.com/marketplace/actions/deploy-to-vercel-action
-      - name: deploy to vercel
-        uses: BetaHuhn/deploy-to-vercel-action@v1.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
