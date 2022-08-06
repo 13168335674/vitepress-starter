@@ -13,12 +13,14 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
-        
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: pnpm
-      - run: pnpm install
+
+      - name: Install
+        run: pnpm install
 
       - name: Build
         run: pnpm docs:build
