@@ -181,3 +181,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+.vercel
